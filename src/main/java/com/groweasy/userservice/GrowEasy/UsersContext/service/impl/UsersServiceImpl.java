@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 public class UsersServiceImpl implements UsersService {
 
     private final UsersRepository usersRepository;
+
     private final ModelMapper modelMapper;
 
     public UsersServiceImpl(UsersRepository usersRepository, ModelMapper modelMapper) {
         this.usersRepository = usersRepository;
+        
         this.modelMapper = modelMapper;
     }
 
