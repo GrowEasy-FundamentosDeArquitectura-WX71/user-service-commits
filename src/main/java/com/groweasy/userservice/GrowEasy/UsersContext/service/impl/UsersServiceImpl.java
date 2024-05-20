@@ -77,7 +77,7 @@ public class UsersServiceImpl implements UsersService {
         }
 
 
-        
+
         User updatedUser = usersRepository.save(user);
         return modelMapper.map(updatedUser, UserResponseDto.class);
     }
