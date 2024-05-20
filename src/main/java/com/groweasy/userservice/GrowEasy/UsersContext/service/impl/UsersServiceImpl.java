@@ -19,7 +19,7 @@ public class UsersServiceImpl implements UsersService {
 
     public UsersServiceImpl(UsersRepository usersRepository, ModelMapper modelMapper) {
         this.usersRepository = usersRepository;
-        
+
         this.modelMapper = modelMapper;
     }
 
@@ -38,9 +38,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UserResponseDto getUserForLogin(String email, String password) {
         var user = usersRepository.findByEmailAndPassword(email, password);
+
         if (user == null) {
             throw new ResourceNotFoundException("No existe un usuario con ese email y contraseña");
         }
+
         return modelMapper.map(user, UserResponseDto.class);
     }
 
@@ -48,6 +50,7 @@ public class UsersServiceImpl implements UsersService {
     public UserResponseDto getUserById(Long id) {
         var user = usersRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró un usuario con el id: " + id));
+
         return modelMapper.map(user, UserResponseDto.class);
     }
 
@@ -73,6 +76,8 @@ public class UsersServiceImpl implements UsersService {
             user.setPassword(userRequestDto.getPassword());
         }
 
+
+        
         User updatedUser = usersRepository.save(user);
         return modelMapper.map(updatedUser, UserResponseDto.class);
     }
